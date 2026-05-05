@@ -1,0 +1,64 @@
+[
+  {
+    "name": "LoadGraph",
+    "parameters": {
+      "path": "/kg-microbe/kgm_train.ttl"
+    }
+  },
+  {
+    "name": "Index",
+    "parameters": {
+      "train": [],
+      "test": []
+    }
+  },
+  {
+    "name": "LoadRuleset",
+    "subname": "FromFile",
+    "parameters": {
+      "path": "/kg-microbe/ruleset_new_try2.ndjson",
+      "format": "ndjson",
+      "parallelism": 0
+    }
+  },
+  {
+    "name": "ComputeConfidence",
+    "parameters": {
+      "name": "PcaConfidence",
+      "min": 0.01
+    }
+  },
+  {
+    "name": "SortRuleset",
+    "parameters": {
+      "by": [
+        {
+          "measure": "PcaConfidence",
+          "reversed": false
+        }
+      ]
+    }
+  },
+  {
+    "name": "Prune",
+    "parameters": {
+      "strategy": "DataCoveragePruning",
+      "onlyFunctionalProperties": false,
+      "onlyExistingTriples": true,
+      "injectiveMapping": true
+    }
+  },
+  {
+    "name": "ComputeConfidence",
+    "parameters": {
+      "name": "Lift"
+    }
+  },
+  {
+    "name": "ExportRules",
+    "parameters": {
+      "path": "/kg-microbe/ruleset_new_try_2_pruned.ndjson",
+      "format": "ndjson"
+    }
+  }
+]

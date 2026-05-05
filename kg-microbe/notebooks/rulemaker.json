@@ -1,0 +1,85 @@
+[
+  {
+    "name": "LoadIndex",
+    "parameters": {
+      "path": "/kg-microbe/kgm_train.index",
+      "partially": false
+    }
+  },
+  {
+    "name": "Mine",
+    "parameters": {
+      "thresholds": [
+        {
+          "name": "MinSupport",
+          "value": 50
+        },
+        {
+          "name": "MaxRuleLength",
+          "value": 4
+        }
+      ],
+      "ruleConsumers": [
+        {
+          "name": "topK",
+          "k": 100000,
+          "allowOverflow": true
+        }
+      ],
+      "patterns": [
+        {
+          "body": [],
+          "head": {
+            "subject": {
+              "name": "Variable",
+              "value": "a"
+            },
+            "predicate": {
+              "name": "Constant",
+              "value": "biolink:occurs_in"
+            },
+            "object": {
+              "name": "Constant",
+              "value": "medm:693"
+            },
+            "graph": {
+              "name": "Any"
+            }
+          },
+          "exact": false,
+          "orderless": true
+        }
+      ],
+      "constraints": [
+        {
+          "name": "WithoutPredicates",
+          "values": [
+            "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>",
+            "rdfs:label"
+          ]
+        },
+        {
+          "name": "OnlyLowerCardinalitySideConstants"
+        },
+        {
+          "name": "WithoutDuplicitPredicates"
+        }
+      ],
+      "parallelism": 0
+    }
+  },
+  {
+    "name": "ComputeSupport",
+    "parameters": {
+      "name": "Support",
+      "min": 50
+    }
+  },
+  {
+    "name": "ExportRules",
+    "parameters": {
+      "path": "/kg-microbe/kg-microbe_media_rules",
+      "format": "ndjson"
+    }
+  }
+]

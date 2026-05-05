@@ -1,0 +1,35 @@
+[
+  {
+    "name": "LoadGraph",
+    "parameters": {
+      "path": "/kg-microbe/original_train.ttl"
+    }
+  },
+  {
+    "name": "Index",
+    "parameters": {
+      "train": [],
+      "test": []
+    }
+  },
+  {
+    "name": "LoadRuleset",
+    "subname": "FromFile",
+    "parameters": {
+      "path": "/kg-microbe/ruleset_obo_pruned.ndjson",
+      "format": "ndjson",
+      "parallelism": 0
+    }
+  },
+  {
+    "name": "ComputeSupport",
+    "parameters": {
+      "name": "Support",
+      "min": 5
+    }
+  },
+  {
+    "name": "GetRules",
+    "parameters": {}
+  }
+]

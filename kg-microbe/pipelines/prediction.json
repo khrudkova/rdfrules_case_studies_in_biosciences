@@ -1,0 +1,91 @@
+[
+  {
+    "name": "LoadGraph",
+    "parameters": {
+      "path": "/kg-microbe/kg_mic.ttl"
+    }
+  },
+  {
+    "name": "Index",
+    "parameters": {
+      "train": [],
+      "test": []
+    }
+  },
+  {
+    "name": "LoadRuleset",
+    "subname": "FromFile",
+    "parameters": {
+      "path": "/kg-microbe/ruleset_obo_pruned.ndjson",
+      "format": "ndjson",
+      "parallelism": 0
+    }
+  },
+  {
+    "name": "FilterRules",
+    "parameters": {
+      "patterns": [],
+      "tripleMatchers": [],
+      "measures": [
+        {
+          "name": "Support",
+          "value": "> 5"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Predict",
+    "parameters": {
+      "rules": [],
+      "chooseTestSet": false,
+      "predictedResults": [],
+      "headVariablePreMapping": {
+        "type": "noMapping"
+      },
+      "injectiveMapping": true,
+      "mergeTestAndTrainForPrediction": true,
+      "onlyTestCoveredPredictions": false
+    }
+  },
+  {
+    "name": "FilterPrediction",
+    "parameters": {
+      "predictedResults": [],
+      "tripleMatchers": [
+        {
+          "subject": "obo:NCBITaxon_529505",
+          "inverse": false
+        }
+      ],
+      "patterns": [],
+      "measures": [],
+      "distinctPredictions": false,
+      "withoutTrainTriples": false,
+      "onlyCoveredTestPredictionTasks": false
+    }
+  },
+  {
+    "name": "GroupPredictions",
+    "parameters": {
+      "useScorer": true,
+      "scorer": {
+        "type": "noisyOr",
+        "confidence": "default"
+      },
+      "useConsumer": false,
+      "confidence": "default"
+    }
+  },
+  {
+    "name": "SortPrediction",
+    "parameters": {}
+  },
+  {
+    "name": "GetPrediction",
+    "parameters": {
+      "maxRules": 10,
+      "showRules": true
+    }
+  }
+]
