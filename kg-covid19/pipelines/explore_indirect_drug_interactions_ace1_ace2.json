@@ -1,0 +1,110 @@
+[
+  {
+    "name": "LoadGraph",
+    "parameters": {
+      "path": "/kg_covid_19_nometa_shortened_20200925.completed.nt"
+    }
+  },
+  {
+    "name": "Index",
+    "parameters": {
+      "train": [],
+      "test": []
+    }
+  },
+  {
+    "name": "CacheIndex",
+    "parameters": {
+      "inMemory": true,
+      "path": "27a4b552-6c2f-42dd-b8ff-60c596ddd413",
+      "revalidate": false
+    }
+  },
+  {
+    "name": "Mine",
+    "parameters": {
+      "thresholds": [
+        {
+          "name": "MinSupport",
+          "value": 1
+        },
+        {
+          "name": "MaxRuleLength",
+          "value": 5
+        },
+        {
+          "name": "Timeout",
+          "value": 5
+        }
+      ],
+      "ruleConsumers": [
+        {
+          "name": "inMemory"
+        }
+      ],
+      "patterns": [
+        {
+          "body": [
+            {
+              "subject": {
+                "name": "Variable",
+                "value": "a"
+              },
+              "predicate": {
+                "name": "Constant",
+                "value": "<molecularly_interacts_with>"
+              },
+              "object": {
+                "name": "Constant",
+                "value": "<Q9BYF1>"
+              },
+              "graph": {
+                "name": "Any"
+              }
+            }
+          ],
+          "head": {
+            "subject": {
+              "name": "Variable",
+              "value": "a"
+            },
+            "predicate": {
+              "name": "Constant",
+              "value": "<molecularly_interacts_with>"
+            },
+            "object": {
+              "name": "Constant",
+              "value": "<P12821>"
+            },
+            "graph": {
+              "name": "Any"
+            }
+          },
+          "exact": false,
+          "orderless": true
+        }
+      ],
+      "constraints": [],
+      "parallelism": 2
+    }
+  },
+  {
+    "name": "CacheRuleset",
+    "parameters": {
+      "inMemory": true,
+      "path": "457256f4-d2bf-4ccb-b349-06c1fb79aec8",
+      "revalidate": false
+    }
+  },
+  {
+    "name": "ComputeConfidence",
+    "parameters": {
+      "name": "StandardConfidence",
+      "min": 0.01
+    }
+  },
+  {
+    "name": "GetRules",
+    "parameters": {}
+  }
+]

@@ -1,0 +1,147 @@
+[
+  {
+    "name": "LoadGraph",
+    "parameters": {
+      "path": "/kg_covid_19_nometa_shortened_20200925.nt"
+    }
+  },
+  {
+    "name": "Index",
+    "parameters": {
+      "train": [],
+      "test": []
+    }
+  },
+  {
+    "name": "CacheIndex",
+    "parameters": {
+      "inMemory": true,
+      "path": "55aef12b-389c-4da9-aae2-c8e309d20df1",
+      "revalidate": false
+    }
+  },
+  {
+    "name": "Mine",
+    "parameters": {
+      "thresholds": [
+        {
+          "name": "MinSupport",
+          "value": 1
+        },
+        {
+          "name": "MaxRuleLength",
+          "value": 3
+        },
+        {
+          "name": "Timeout",
+          "value": 5
+        }
+      ],
+      "ruleConsumers": [
+        {
+          "name": "inMemory"
+        }
+      ],
+      "patterns": [
+        {
+          "body": [
+            {
+              "subject": {
+                "name": "Variable",
+                "value": "a"
+              },
+              "predicate": {
+                "name": "OneOf",
+                "value": [
+                  "<molecularly_interacts_with>",
+                  "<interacts_with>"
+                ]
+              },
+              "object": {
+                "name": "Constant",
+                "value": "<Q9BYF1>"
+              },
+              "graph": {
+                "name": "Any"
+              }
+            },
+            {
+              "subject": {
+                "name": "Variable",
+                "value": "a"
+              },
+              "predicate": {
+                "name": "OneOf",
+                "value": [
+                  "<molecularly_interacts_with>",
+                  "<interacts_with>"
+                ]
+              },
+              "object": {
+                "name": "Any"
+              },
+              "graph": {
+                "name": "Any"
+              }
+            }
+          ],
+          "head": {
+            "subject": {
+              "name": "Variable",
+              "value": "a"
+            },
+            "predicate": {
+              "name": "OneOf",
+              "value": [
+                "<molecularly_interacts_with>",
+                "<interacts_with>"
+              ]
+            },
+            "object": {
+              "name": "Constant",
+              "value": "<P12821>"
+            },
+            "graph": {
+              "name": "Any"
+            }
+          },
+          "exact": false,
+          "orderless": true
+        }
+      ],
+      "constraints": [],
+      "parallelism": 2
+    }
+  },
+  {
+    "name": "ComputeConfidence",
+    "parameters": {
+      "name": "StandardConfidence",
+      "min": 0.5
+    }
+  },
+  {
+    "name": "Prune",
+    "parameters": {
+      "strategy": "DataCoveragePruning",
+      "onlyFunctionalProperties": false,
+      "onlyExistingTriples": true,
+      "injectiveMapping": true
+    }
+  },
+  {
+    "name": "SortRuleset",
+    "parameters": {
+      "by": [
+        {
+          "measure": "Support",
+          "reversed": false
+        }
+      ]
+    }
+  },
+  {
+    "name": "GetRules",
+    "parameters": {}
+  }
+]

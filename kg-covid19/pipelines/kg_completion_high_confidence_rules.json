@@ -1,0 +1,105 @@
+[
+  {
+    "name": "LoadGraph",
+    "parameters": {
+      "path": "/kg-covid-19_nometa_shortened_20200925.completed.nt"
+    }
+  },
+  {
+    "name": "Index",
+    "parameters": {
+      "train": [],
+      "test": []
+    }
+  },
+  {
+    "name": "CacheIndex",
+    "parameters": {
+      "inMemory": true,
+      "path": "4a07cedc-dcc0-45d6-b5fe-621b43c39faa",
+      "revalidate": false
+    }
+  },
+  {
+    "name": "Mine",
+    "parameters": {
+      "thresholds": [
+        {
+          "name": "MinSupport",
+          "value": 700
+        },
+        {
+          "name": "Timeout",
+          "value": 5
+        },
+        {
+          "name": "MaxRuleLength",
+          "value": 3
+        }
+      ],
+      "ruleConsumers": [
+        {
+          "name": "inMemory"
+        }
+      ],
+      "patterns": [
+        {
+          "body": [
+            {
+              "subject": {
+                "name": "Any"
+              },
+              "predicate": {
+                "name": "Any"
+              },
+              "object": {
+                "name": "Any"
+              },
+              "graph": {
+                "name": "Any"
+              }
+            }
+          ],
+          "head": {
+            "subject": {
+              "name": "Any"
+            },
+            "predicate": {
+              "name": "Any"
+            },
+            "object": {
+              "name": "Constant",
+              "value": "<Q9BYF1>"
+            },
+            "graph": {
+              "name": "Any"
+            }
+          },
+          "exact": false,
+          "orderless": true
+        }
+      ],
+      "constraints": [],
+      "parallelism": 0
+    }
+  },
+  {
+    "name": "ComputeConfidence",
+    "parameters": {
+      "name": "StandardConfidence",
+      "min": 0.9
+    }
+  },
+  {
+    "name": "CacheRuleset",
+    "parameters": {
+      "inMemory": true,
+      "path": "a0677f25-3b04-47f7-a575-2b2d8bd11e81",
+      "revalidate": false
+    }
+  },
+  {
+    "name": "GetRules",
+    "parameters": {}
+  }
+]
